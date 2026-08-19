@@ -19,8 +19,37 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
-  <!-- Fonts load without blocking the first paint; the system stack renders instantly
-     and is swapped when the webfont arrives. Four files instead of eight. -->
+
+  <!-- Meta Pixel Base Code + Lead Conversion (Thank You Page Only) -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+
+    // Initialize Base Pixel
+    fbq('init', '4100332866873996');
+
+    // Track PageView & Standard Lead Conversion Event
+    fbq('track', 'PageView');
+    fbq('track', 'Lead', {
+      content_name: 'Karma TMS Qualification Inquiry',
+      status: 'Completed'
+    });
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=4100332866873996&ev=Lead&noscript=1" />
+  </noscript>
+
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&display=swap">
   <link rel="stylesheet" media="print" onload="this.media='all';this.onload=null"
@@ -3802,16 +3831,19 @@
   </div><!-- /topbar -->
 
   <!-- ================= HERO ================= -->
-  <main style="display: flex; align-items: center; justify-content: center; min-height: 60vh; text-align: center; padding: 40px 20px;">
+  <main
+    style="display: flex; align-items: center; justify-content: center; min-height: 60vh; text-align: center; padding: 40px 20px;">
     <div class="wrap-narrow" style="max-width: 600px;">
       <div style="margin-bottom: 24px; color: var(--green);">
-        <svg viewBox="0 0 24 24" aria-hidden="true" width="64" height="64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="64" height="64" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
           <polyline points="22 4 12 14.01 9 11.01"></polyline>
         </svg>
       </div>
       <h1 class="h1" style="margin-bottom: 16px;">Thank You!</h1>
-      <p class="lede" style="margin-bottom: 32px;">Your information has been successfully submitted. One of our care coordinators will be in touch with you shortly.</p>
+      <p class="lede" style="margin-bottom: 32px;">Your information has been successfully submitted. One of our care
+        coordinators will be in touch with you shortly.</p>
       <a class="btn btn-primary btn-lg" href="index.html">Return to Home</a>
     </div>
   </main>
@@ -3883,4 +3915,5 @@
     </div>
   </footer>
 </body>
+
 </html>

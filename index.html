@@ -19,6 +19,105 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://i.ytimg.com" crossorigin>
+
+  <!-- Meta Pixel Base Code + Page Signals (Landing Page) -->
+  <script>
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+      n.queue = []; t = b.createElement(e); t.async = !0;
+      t.src = v; s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+
+    // Pixel Initialization
+    fbq('init', '4100332866873996');
+    fbq('track', 'PageView');
+  </script>
+
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=4100332866873996&ev=PageView&noscript=1" />
+  </noscript>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // 1. SCROLL DEPTH TRACKING (25%, 50%, 75%, 90% / Page Bottom)
+      var trackedScrolls = { 25: false, 50: false, 75: false, 90: false };
+
+      window.addEventListener('scroll', function () {
+        var winHeight = window.innerHeight;
+        var docHeight = document.documentElement.scrollHeight;
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var scrollPercent = ((scrollTop + winHeight) / docHeight) * 100;
+
+        if (scrollPercent >= 25 && !trackedScrolls[25]) {
+          fbq('trackCustom', 'ScrollDepth_25');
+          trackedScrolls[25] = true;
+        }
+        if (scrollPercent >= 50 && !trackedScrolls[50]) {
+          fbq('trackCustom', 'ScrollDepth_50');
+          trackedScrolls[50] = true;
+        }
+        if (scrollPercent >= 75 && !trackedScrolls[75]) {
+          fbq('trackCustom', 'ScrollDepth_75');
+          trackedScrolls[75] = true;
+        }
+        if (scrollPercent >= 90 && !trackedScrolls[90]) {
+          fbq('trackCustom', 'PageBottomReached');
+          trackedScrolls[90] = true;
+        }
+      });
+
+      // 2. CTA BUTTON CLICKS ("Check If I Qualify", "See How TMS Works", "Claim Your Slot")
+      var ctaLinks = document.querySelectorAll('a[href*="#qualify"], a[href*="#how"], header a, .announcement-bar a');
+      ctaLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          var btnText = link.innerText.trim() || 'CTA Click';
+          fbq('trackCustom', 'CTAClicked', { button_name: btnText });
+        });
+      });
+
+      // 3. VIDEO ENGAGEMENT TRACKING (HTML5 & YouTube Embeds)
+      // Standard HTML5 Videos
+      var html5Videos = document.querySelectorAll('video');
+      html5Videos.forEach(function (video) {
+        var started = false;
+        video.addEventListener('play', function () {
+          if (!started) {
+            fbq('trackCustom', 'VideoStarted');
+            started = true;
+          }
+        });
+      });
+
+      // If YouTube embed iframe exists on the page
+      var ytIframes = document.querySelectorAll('iframe[src*="youtube.com"]');
+      ytIframes.forEach(function (iframe) {
+        iframe.addEventListener('load', function () {
+          fbq('trackCustom', 'VideoContainerViewed');
+        });
+      });
+
+      // 4. TIME-ON-PAGE / DEEP ENGAGEMENT (High-Intent Signal for Meta AI)
+      // Sends signal after user spends 30 seconds actively reading
+      setTimeout(function () {
+        fbq('trackCustom', 'EngagedReader_30s');
+      }, 30000);
+
+      // Sends signal after user spends 60 seconds actively reading
+      setTimeout(function () {
+        fbq('trackCustom', 'EngagedReader_60s');
+      }, 60000);
+
+    });
+  </script>
+
   <!-- Fonts load without blocking the first paint; the system stack renders instantly
      and is swapped when the webfont arrives. Four files instead of eight. -->
   <link rel="preload" as="style"
@@ -1504,7 +1603,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 22%
+      object-position: center bottom
     }
 
     .host-photo .ph {
@@ -4950,15 +5049,8 @@
   <div class="qmodal" id="qualifyModal" role="dialog" aria-modal="true" aria-labelledby="qm-h" hidden>
     <div class="qmodal-box" role="document">
       <button type="button" class="qmodal-x" id="qmClose" aria-label="Close">&times;</button>
-      <style>
-        @media (max-width: 768px) {
-          #QO8GNk1FdSnkSekrbdcx {
-            height: 85vh !important;
-            min-height: 800px !important;
-          }
-        }
-      </style>
-      <iframe src="https://api.leadconnectorhq.com/widget/survey/QO8GNk1FdSnkSekrbdcx" style="border:none;width:100%;height:600px;" scrolling="no" id="QO8GNk1FdSnkSekrbdcx" title="survey"></iframe>
+      <iframe src="https://api.leadconnectorhq.com/widget/survey/QO8GNk1FdSnkSekrbdcx" style="border:none;width:100%;"
+        scrolling="no" id="QO8GNk1FdSnkSekrbdcx" title="survey"></iframe>
       <script src="https://link.msgsndr.com/js/form_embed.js"></script>
     </div>
   </div>
